@@ -1,3 +1,4 @@
+//TEST/ASSERTION FUNCTIONS
 const eqArrays = function (array1, array2) {
   if (array1.length !== array2.length) {
     return false;
@@ -19,21 +20,13 @@ const assertArraysEqual = function (actual, expected) {
   }
 };
 
-const flatten = function (array) {
-  const result = [];
-  for (let i = 0; i < array.length; i++) {
-    let nextValue = array[i];
-    if (Array.isArray(nextValue)) {
-      for (let j = 0; j < nextValue.length; j++) {
-        result.push(nextValue[j]);
-      }
-    } else {
-      result.push(nextValue);
-    }
-  }
-  return result;
-};
+//ACTUAL FUNCTION
+const middle = function (array) {};
 
 //TEST CODE
-// console.log(flatten([1, 2, [3, 4], 5, [6]])); // => [1, 2, 3, 4, 5, 6]
-// console.log(flatten([1, 2, [3, 5], [4], 5, [6, 7]]));
+middle([1]); // => []
+middle([1, 2]); // => []
+middle([1, 2, 3]); // => [2]
+middle([1, 2, 3, 4, 5]); // => [3]
+middle([1, 2, 3, 4]); // => [2, 3]
+middle([1, 2, 3, 4, 5, 6]); // => [3, 4]
