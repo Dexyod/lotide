@@ -21,22 +21,15 @@ const eqArrays = function (array1, array2) {
 
 //ACTUAL FUNCTION
 const eqObjects = function (object1, object2) {
-  if (lengthOfKeys(object1) === lengthOfKeys(object2)) {
-    for (const value of Object.keys(object1)) {
-      let value1 = object1[value];
-      let value2 = object2[value];
+  if (object1 === object2) return true;
 
-      if (Array.isArray(value1) && Array.isArray(value2)) {
-        return eqArrays(value1, value2);
-      } else {
-        if (value1 !== value2) {
-          return false;
-        }
-      }
-    }
-    return true;
+  if (lengthOfKeys(object1) !== lengthOfKeys(object2)) return false;
+
+  for (const key in object1) {
+    if (!(key in object2)) return false;
+    if (!eqObjects(object1[key], object2[key])) return false;
   }
-  return false;
+  return true;
 };
 
 const lengthOfKeys = function (object) {
@@ -60,3 +53,11 @@ assertEqual(eqObjects(cd, dc), true); // => true
 
 const cd2 = { c: "1", d: ["2", 3, 4] };
 assertEqual(eqObjects(cd, cd2), false); // => false
+
+assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true); // => true
+
+assertEqual(
+  eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }),
+  false
+); // => false
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false); // => false
