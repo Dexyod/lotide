@@ -1,19 +1,18 @@
 //TEST ASSERTION IMPLEMENTATION
-const assertEqual = require("../assertEqual");
+const assert = require("chai").assert;
 const findKey = require("../findKey");
 
-//TEST CODE
-assertEqual(
-  findKey(
-    {
+describe("#findKey", () => {
+  it("should return the result of the callback as a string", () => {
+    const input = {
       "Blue Hill": { stars: 1 },
       Akaleri: { stars: 3 },
       noma: { stars: 2 },
       elBulli: { stars: 3 },
       Ora: { stars: 2 },
       Akelarre: { stars: 3 },
-    },
-    (x) => x.stars === 2
-  ),
-  "noma"
-); // => "noma"
+    };
+    const callback = (x) => x.stars === 2;
+    assert.equal(findKey(input, callback), "noma");
+  });
+});

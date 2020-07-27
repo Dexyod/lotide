@@ -1,19 +1,18 @@
-const assertEqual = require("../assertEqual");
+const assert = require("chai").assert;
 const countLetters = require("../countLetters");
-//TEST CODE
-const result1 = countLetters("LHL");
-assertEqual(result1["l"], 2);
-assertEqual(result1["h"], 1);
 
-const result2 = countLetters("lighthouse in the house");
-
-assertEqual(result2["l"], 1);
-assertEqual(result2["i"], 2);
-assertEqual(result2["g"], 1);
-assertEqual(result2["h"], 4);
-assertEqual(result2["t"], 2);
-assertEqual(result2["o"], 2);
-assertEqual(result2["u"], 2);
-assertEqual(result2["s"], 2);
-assertEqual(result2["e"], 3);
-assertEqual(result2["n"], 1);
+describe("#countLetters", () => {
+  it("should return an object with keys as chars in string and values of how many times the chars show up in the string", () => {
+    const result = countLetters("LHL");
+    const expectedOutcome = {
+      l: 2,
+      h: 1,
+    };
+    assert.deepEqual(result, expectedOutcome);
+  });
+  it("should return an empty object when empty string is input", () => {
+    const result = countLetters("");
+    const expectedOutcome = {};
+    assert.deepEqual(result, expectedOutcome);
+  });
+});

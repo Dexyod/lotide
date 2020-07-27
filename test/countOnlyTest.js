@@ -1,25 +1,38 @@
-//TEST/ASSERTION FUNCTIONS
-const assertEqual = require("../assertEqual");
+const assert = require("chai").assert;
 const countOnly = require("../countOnly");
-// TEST CODE
-const firstNames = [
-  "Karl",
-  "Salima",
-  "Agouhanna",
-  "Fang",
-  "Kavith",
-  "Jason",
-  "Salima",
-  "Fang",
-  "Joe",
-];
 
-const result1 = countOnly(firstNames, {
-  Jason: true,
-  Karima: true,
-  Fang: true,
+describe("#countOnly", () => {
+  it("should return an object with keys of names and values of how many times that were in the array", () => {
+    const firstNames = [
+      "Karl",
+      "Salima",
+      "Agouhanna",
+      "Fang",
+      "Kavith",
+      "Jason",
+      "Salima",
+      "Fang",
+      "Joe",
+    ];
+
+    const itemsToFind = {
+      Jason: true,
+      Karima: true,
+      Fang: 2,
+    };
+
+    const result = {
+      Jason: 1,
+      Fang: 2,
+    };
+    assert.deepEqual(countOnly(firstNames, itemsToFind), result);
+  });
+  it("should return an empty object if passed an empty array of object", () => {
+    const firstNames = [];
+
+    const itemsToFind = {};
+
+    const result = {};
+    assert.deepEqual(countOnly(firstNames, itemsToFind), result);
+  });
 });
-
-assertEqual(result1["Jason"], 1);
-assertEqual(result1["Karima"], undefined);
-assertEqual(result1["Fang"], 2);
